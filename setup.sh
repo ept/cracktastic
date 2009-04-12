@@ -14,8 +14,8 @@
 
 # Create a new git branch to which we will commit the auto-generated webapp;
 # delete any existing branch of the same name.
-git checkout master
 git clean -f -d -x
+git checkout master
 git branch -D generated
 git checkout -b generated
 
@@ -35,7 +35,7 @@ git commit -m 'Added rspec and rspec_rails'
 git submodule add git://github.com/technoweenie/restful-authentication.git vendor/plugins/restful_authentication
 ruby script/generate authenticated user sessions --include-activation --aasm --rspec
 git add app/controllers/{users,sessions}_controller.rb app/helpers/{users,sessions}_helper.rb \
-    app/models/user{,_mailer,_observer}.rb app/views/{sessions,user_mailer,users \
+    app/models/user{,_mailer,_observer}.rb app/views/{sessions,user_mailer,users} \
     config/initializers/site_keys.rb config/routes.rb features \
     lib/authenticated_{system,test_helper}.rb spec/{controllers,fixtures,helpers,models}
 git commit -m 'Added restful_authentication'
