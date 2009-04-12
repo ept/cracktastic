@@ -23,3 +23,9 @@ git checkout -b generated
 rails --database=mysql .
 git add README Rakefile app config doc public script test
 git commit -m 'Generated rails project structure'
+
+# Add rspec & restful authentication
+git submodule add git://github.com/dchelimsky/rspec.git vendor/plugins/rspec
+git submodule add git://github.com/dchelimsky/rspec-rails.git vendor/plugins/rspec_rails
+git submodule add git://github.com/technoweenie/restful-authentication.git vendor/plugins/restful_authentication
+
