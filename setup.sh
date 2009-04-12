@@ -70,7 +70,12 @@ git add db
 git commit -m 'Combined initial database migrations'
 
 # Merge in edits from another branch
-git merge edits
+git checkout edits
+git diff -p a850a059f2a43d8a7b85daba843f620d8007b80d > edits.patch
+git checkout generated
+patch -p1 < edits.patch
+rm edits.patch
+git commit -a -m 'Merged manual changes from edits branch'
 
-git tag setup1
+#git tag setup1
 
