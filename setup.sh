@@ -8,9 +8,18 @@
 #
 # To see what's going on, simply run the commands one by one and review the
 # results.
+#
+# WARNING: Uncommitted changes in your master branch will be discarded, and
+# the branch called 'generated' will be removed entirely.
 
-# Create a new git branch to which we will commit the auto-generated webapp
+# Create a new git branch to which we will commit the auto-generated webapp;
+# delete any existing branch of the same name.
+git checkout master
+git clean -f -d -x
+git branch -D generated
 git checkout -b generated
 
 # Generate skeleton
 rails --database=mysql .
+git add README Rakefile app config doc public script test
+git commit -m 'Generated rails project structure'
