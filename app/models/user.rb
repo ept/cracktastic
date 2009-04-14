@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
   include Authentication::ByPassword
   include Authentication::ByCookieToken
   include Authorization::AasmRoles
+  
+  belongs_to :company
+  has_many :purchases
+  has_many :jokes, :through => :purchases
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
