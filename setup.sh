@@ -44,7 +44,7 @@ git commit -m 'Added restful_authentication'
 
 # Add companies (e.g. customers)
 script/generate scaffold company is_self:boolean name:string contact_name:string address:text \
-    city:string postal_code:string country:string country_code:string tax_number:string
+    city:string state:string postal_code:string country:string country_code:string tax_number:string
 git add app/views/companies app/views/layouts/companies.html.erb app/controllers/companies_controller.rb \
     test/functional/companies_controller_test.rb app/helpers/companies_helper.rb config/routes.rb \
     app/models/company.rb test/unit/company_test.rb test/fixtures/companies.yml public/stylesheets/scaffold.css

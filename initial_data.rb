@@ -3,23 +3,27 @@
 
     # Create companies
     Company.reset_column_information
-    cracktastic = Company.create :is_self => true, :name => 'Cracktastic Ltd',
+    cracktastic = Company.new :is_self => true, :name => 'Cracktastic Ltd',
         :contact_name => 'Accounts Dept', :address => "Cracker House\nThe Avenue",
         :city => 'Magictown', :postal_code => 'AA1 9ZZ', :country => 'United Kingdom',
         :country_code => 'GB', :tax_number => 'GB 123 4567 890'
-    customer = Company.create :is_self => false, :name => 'Customer Ltd',
+    cracktastic.save!
+    customer = Company.new :is_self => false, :name => 'Customer Ltd',
         :contact_name => 'Michael Smith', :address => "42 Foo Lane",
         :city => 'London', :postal_code => 'SW1 2BC', :country => 'United Kingdom',
         :country_code => 'GB'
+    customer.save!
 
     # Create users
     User.reset_column_information
-    user = User.new :login => 'admin', :email => 'admin@example.com', :company_id => cracktastic.id,
+    user = User.new :login => 'admin', :email => 'admin@example.com',
         :password => 'asdfasdf', :password_confirmation => 'asdfasdf'
+    user.company = cracktastic
     user.register!
     user.activate!
-    user = User.new :login => 'test', :email => 'test@example.com', :company_id => customer.id,
+    user = User.new :login => 'test', :email => 'test@example.com',
         :password => 'asdfasdf', :password_confirmation => 'asdfasdf'
+    user.company = customer
     user.register!
     user.activate!
 
