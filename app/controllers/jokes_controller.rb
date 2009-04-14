@@ -5,7 +5,7 @@ class JokesController < ApplicationController
   # GET /jokes
   # GET /jokes.xml
   def index
-    @jokes = Joke.find(:all)
+    @jokes = Joke.not_purchased_by_company(current_user.company)
 
     respond_to do |format|
       format.html # index.html.erb
