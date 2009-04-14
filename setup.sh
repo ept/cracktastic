@@ -96,7 +96,7 @@ git commit -m 'Combined initial database migrations'
 
 # Merge in edits from another branch
 git checkout edits
-git diff -p a850a059f2a43d8a7b85daba843f620d8007b80d > edits.patch
+git diff -p df8b49f787dd4401423d453662de19c3d2754073 > edits.patch
 git checkout generated
 patch -p1 -f < edits.patch
 rm edits.patch
