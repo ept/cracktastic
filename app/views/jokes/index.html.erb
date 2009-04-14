@@ -1,0 +1,22 @@
+<h1>Listing jokes</h1>
+
+<table>
+  <tr>
+    <th>Question</th>
+    <th>Answer</th>
+  </tr>
+
+<% for joke in @jokes %>
+  <tr>
+    <td><%=h joke.question %></td>
+    <td><%=h joke.answer %></td>
+    <td><%= link_to 'Show', joke %></td>
+    <td><%= link_to 'Edit', edit_joke_path(joke) %></td>
+    <td><%= link_to 'Destroy', joke, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New joke', new_joke_path %>

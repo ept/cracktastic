@@ -1,0 +1,13 @@
+<p>
+  <b>Question:</b>
+  <%=h @joke.question %>
+</p>
+
+<p>
+  <b>Answer:</b>
+  <%=h @joke.answer %>
+</p>
+
+
+<%= link_to 'Edit', edit_joke_path(@joke) %> |
+<%= link_to 'Back', jokes_path %>
