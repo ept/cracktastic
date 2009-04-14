@@ -1,0 +1,53 @@
+<p>
+  <b>Is self:</b>
+  <%=h @company.is_self %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @company.name %>
+</p>
+
+<p>
+  <b>Contact name:</b>
+  <%=h @company.contact_name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%=h @company.address %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%=h @company.city %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%=h @company.state %>
+</p>
+
+<p>
+  <b>Postal code:</b>
+  <%=h @company.postal_code %>
+</p>
+
+<p>
+  <b>Country:</b>
+  <%=h @company.country %>
+</p>
+
+<p>
+  <b>Country code:</b>
+  <%=h @company.country_code %>
+</p>
+
+<p>
+  <b>Tax number:</b>
+  <%=h @company.tax_number %>
+</p>
+
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>

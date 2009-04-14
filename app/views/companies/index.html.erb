@@ -1,0 +1,38 @@
+<h1>Listing companies</h1>
+
+<table>
+  <tr>
+    <th>Is self</th>
+    <th>Name</th>
+    <th>Contact name</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Postal code</th>
+    <th>Country</th>
+    <th>Country code</th>
+    <th>Tax number</th>
+  </tr>
+
+<% for company in @companies %>
+  <tr>
+    <td><%=h company.is_self %></td>
+    <td><%=h company.name %></td>
+    <td><%=h company.contact_name %></td>
+    <td><%=h company.address %></td>
+    <td><%=h company.city %></td>
+    <td><%=h company.state %></td>
+    <td><%=h company.postal_code %></td>
+    <td><%=h company.country %></td>
+    <td><%=h company.country_code %></td>
+    <td><%=h company.tax_number %></td>
+    <td><%= link_to 'Show', company %></td>
+    <td><%= link_to 'Edit', edit_company_path(company) %></td>
+    <td><%= link_to 'Destroy', company, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New company', new_company_path %>
