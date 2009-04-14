@@ -8,16 +8,6 @@
 #
 # To see what's going on, simply run the commands one by one and review the
 # results.
-#
-# WARNING: Uncommitted changes in your master branch will be discarded, and
-# the branch called 'generated' will be removed entirely.
-
-# Create a new git branch to which we will commit the auto-generated webapp;
-# delete any existing branch of the same name.
-git clean -f -d -x
-git checkout master
-git branch -D generated
-git checkout -b generated
 
 # Generate skeleton
 rails --database=mysql .
@@ -94,13 +84,3 @@ mv migration.rb db/migrate/00000000000000_initial_setup.rb
 git add db
 git commit -m 'Combined initial database migrations'
 
-# Merge in edits from another branch
-git checkout edits
-git diff -p df8b49f787dd4401423d453662de19c3d2754073 > edits.patch
-git checkout generated
-patch -p1 -f < edits.patch
-rm edits.patch
-git commit -a -m 'Merged manual changes from edits branch'
-
-# Run the migrations and we're done.
-rake db:migrate
