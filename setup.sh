@@ -102,5 +102,5 @@ patch -p1 -f < edits.patch
 rm edits.patch
 git commit -a -m 'Merged manual changes from edits branch'
 
-#git tag setup1
-
+# Run the migrations and we're done.
+rake db:migrate
