@@ -42,7 +42,27 @@ git add app/controllers/{users,sessions}_controller.rb app/helpers/{users,sessio
     lib/authenticated_{system,test_helper}.rb spec/{controllers,fixtures,helpers,models}
 git commit -m 'Added restful_authentication'
 
-# Combine all the migrations into one initial migration
+# Add companies (e.g. customers)
+script/generate scaffold company is_self:boolean name:string contact_name:string address:text \
+    city:string postal_code:string country:string country_code:string tax_number:string
+git add app/views/companies app/views/layouts/companies.html.erb app/controllers/companies_controller.rb \
+    test/functional/companies_controller_test.rb app/helpers/companies_helper.rb config/routes.rb \
+    app/models/company.rb test/unit/company_test.rb test/fixtures/companies.yml public/stylesheets/scaffold.css
+git commit -m 'Added companies scaffolding'
+
+# Add jokes
+script/generate scaffold joke question:text answer:text
+git add app/views/jokes app/controllers/jokes_controller.rb test/functional/jokes_controller_test.rb \
+    app/helpers/jokes_helper.rb config/routes.rb app/models/joke.rb test/unit/joke_test.rb \
+    test/fixtures/jokes.yml
+git commit -m 'Added jokes scaffolding'
+
+# Add purchases
+script/generate model purchase company_id:integer user_id:integer joke_id:integer
+git add app/models/purchase.rb test/unit/purchase_test.rb test/fixtures/purchases.yml
+git commit -m 'Added purchase model'
+
+# Combine all the up-migrations into one initial migration
 echo 'class InitialSetup < ActiveRecord::Migration' >  migration.rb
 echo '  def self.up'                                >> migration.rb
 for file in `ls db/migrate`
@@ -51,9 +71,13 @@ do
   sed -e '0,/^  def self\.up/d' -e '/^  end/,$d' db/migrate/$file >> migration.rb
   echo ''                                           >> migration.rb
 done
+
+# Pre-populate the database with some test data
+cat initial_data.rb                                 >> migration.rb
 echo '  end'                                        >> migration.rb
 echo ''                                             >> migration.rb
 
+# Combine all the down-migrations into the initial migration
 echo '  def self.down'                              >> migration.rb
 for file in `ls db/migrate | sort -r`
 do
@@ -64,6 +88,7 @@ done
 echo '  end'                                        >> migration.rb
 echo 'end'                                          >> migration.rb
 
+# Replace all the existing migrations with the new combined one
 rm db/migrate/*.rb
 mv migration.rb db/migrate/00000000000000_initial_setup.rb
 git add db
@@ -73,7 +98,7 @@ git commit -m 'Combined initial database migrations'
 git checkout edits
 git diff -p a850a059f2a43d8a7b85daba843f620d8007b80d > edits.patch
 git checkout generated
-patch -p1 < edits.patch
+patch -p1 -f < edits.patch
 rm edits.patch
 git commit -a -m 'Merged manual changes from edits branch'
 
