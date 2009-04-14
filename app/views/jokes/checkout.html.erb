@@ -1,0 +1,13 @@
+<h1>Purchase joke</h1>
+
+<% form_for(:purchase, @purchase, :url => {:controller => 'jokes', :action => 'purchase', :id => @purchase.joke_id}) do |f| %>
+	<%= f.error_messages %>
+
+	<p><em><%=h @purchase.joke.question %></em></p>
+	
+	<p><strong>...buy this joke now?</strong></p>
+
+	<p><%= f.submit "Buy now" %></p>
+<% end %>
+
+<%= link_to 'Back', @purchase.joke %>

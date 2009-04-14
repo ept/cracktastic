@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :jokes
+  map.resources :jokes, :member => { :checkout => :get, :purchase => :post }, :collection => { :my => :get }
 
   map.resources :companies
 

@@ -1,0 +1,13 @@
+<h1>My jokes</h1>
+
+<dl>
+
+<% for purchase in @purchases %>
+	<dt><%= link_to(h(purchase.joke.question), purchase.joke) %></dt>
+	<dd>
+		<%= link_to(h(purchase.joke.answer), purchase.joke) %><br />
+		Purchased by <%=h purchase.user.login %> on <%= purchase.created_at.strftime('%d %b %Y') %>
+	</dd>
+<% end %>
+
+</dl>
