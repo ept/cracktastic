@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # This script bootstraps the demo project, creating it from scratch using
-# Rails generators. To run it, you must have a git clone of the invoicing-demo
+# Rails generators. To run it, you must have a git clone of the cracktastic
 # repository, and you must be currently at the head of the master branch.
 # Then type:
 #   ./setup.sh
@@ -54,7 +54,7 @@ git commit -m 'Added companies scaffolding'
 script/generate scaffold joke question:text answer:text
 git add app/views/jokes app/controllers/jokes_controller.rb test/functional/jokes_controller_test.rb \
     app/helpers/jokes_helper.rb config/routes.rb app/models/joke.rb test/unit/joke_test.rb \
-    test/fixtures/jokes.yml
+    test/fixtures/jokes.yml app/views/layouts/jokes.html.erb
 git commit -m 'Added jokes scaffolding'
 
 # Add purchases
