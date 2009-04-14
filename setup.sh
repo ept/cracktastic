@@ -11,7 +11,7 @@
 
 # Generate skeleton
 rails --database=mysql .
-git add README Rakefile app config doc public script test
+git add README Rakefile app config doc public script
 git commit -m 'Generated rails project structure'
 
 # Add rspec & rspec_rails
@@ -36,20 +36,18 @@ git commit -m 'Added restful_authentication'
 script/generate scaffold company is_self:boolean name:string contact_name:string address:text \
     city:string state:string postal_code:string country:string country_code:string tax_number:string
 git add app/views/companies app/views/layouts/companies.html.erb app/controllers/companies_controller.rb \
-    test/functional/companies_controller_test.rb app/helpers/companies_helper.rb config/routes.rb \
-    app/models/company.rb test/unit/company_test.rb test/fixtures/companies.yml public/stylesheets/scaffold.css
+    app/helpers/companies_helper.rb config/routes.rb app/models/company.rb public/stylesheets/scaffold.css
 git commit -m 'Added companies scaffolding'
 
 # Add jokes
 script/generate scaffold joke question:text answer:text
-git add app/views/jokes app/controllers/jokes_controller.rb test/functional/jokes_controller_test.rb \
-    app/helpers/jokes_helper.rb config/routes.rb app/models/joke.rb test/unit/joke_test.rb \
-    test/fixtures/jokes.yml app/views/layouts/jokes.html.erb
+git add app/views/jokes app/controllers/jokes_controller.rb app/helpers/jokes_helper.rb \
+    config/routes.rb app/models/joke.rb app/views/layouts/jokes.html.erb
 git commit -m 'Added jokes scaffolding'
 
 # Add purchases
 script/generate model purchase company_id:integer user_id:integer joke_id:integer
-git add app/models/purchase.rb test/unit/purchase_test.rb test/fixtures/purchases.yml
+git add app/models/purchase.rb
 git commit -m 'Added purchase model'
 
 # Combine all the up-migrations into one initial migration
