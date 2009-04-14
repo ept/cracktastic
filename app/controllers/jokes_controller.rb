@@ -1,4 +1,7 @@
 class JokesController < ApplicationController
+  before_filter :login_required
+  before_filter :admin_required, :only => [:new, :edit, :create, :update, :destroy]
+
   # GET /jokes
   # GET /jokes.xml
   def index

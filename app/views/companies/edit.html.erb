@@ -3,10 +3,12 @@
 <% form_for(@company) do |f| %>
   <%= f.error_messages %>
 
+  <% if logged_in_as_admin? %>
   <p>
     <%= f.label :is_self %><br />
     <%= f.check_box :is_self %>
   </p>
+  <% end %>
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>

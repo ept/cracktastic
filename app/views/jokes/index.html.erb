@@ -1,22 +1,25 @@
 <h1>Listing jokes</h1>
 
-<table>
-  <tr>
-    <th>Question</th>
-    <th>Answer</th>
-  </tr>
+<ul>
 
 <% for joke in @jokes %>
-  <tr>
-    <td><%=h joke.question %></td>
-    <td><%=h joke.answer %></td>
-    <td><%= link_to 'Show', joke %></td>
-    <td><%= link_to 'Edit', edit_joke_path(joke) %></td>
-    <td><%= link_to 'Destroy', joke, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+	<li>
+		<%=h joke.question %><br />
+		<% if logged_in_as_admin? %>
+			<%=h joke.answer %><br />
+		    <%= link_to 'Show', joke %> |
+		    <%= link_to 'Edit', edit_joke_path(joke) %> |
+		    <%= link_to 'Destroy', joke, :confirm => 'Are you sure?', :method => :delete %>
+		<% else %>
+			<%= link_to 'Purchase this joke to see the answer', :action => :checkout, :id => joke %>
+		<% end %>
+	</li>
 <% end %>
-</table>
+
+</ul>
 
 <br />
 
-<%= link_to 'New joke', new_joke_path %>
+<% if logged_in_as_admin? %>
+	<%= link_to 'New joke', new_joke_path %>
+<% end %>

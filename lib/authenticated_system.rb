@@ -5,6 +5,12 @@ module AuthenticatedSystem
     def logged_in?
       !!current_user
     end
+    
+    # Returns true or false if the user is logged in and is a representative of the company
+    # operating this web application.
+    def logged_in_as_admin?
+      logged_in? && current_user.company && current_user.company.is_self
+    end
 
     # Accesses the current user from the session.
     # Future calls avoid the database because nil is not equal to false.
@@ -51,6 +57,11 @@ module AuthenticatedSystem
     #
     def login_required
       authorized? || access_denied
+    end
+    
+    # Filter method to require an admin to be logged in. Use like +login_required+
+    def admin_required
+      logged_in_as_admin? || access_denied
     end
 
     # Redirect as appropriate when an access request fails.

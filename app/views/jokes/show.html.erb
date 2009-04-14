@@ -8,6 +8,7 @@
   <%=h @joke.answer %>
 </p>
 
-
-<%= link_to 'Edit', edit_joke_path(@joke) %> |
+<% if logged_in_as_admin? %>
+	<%= link_to 'Edit', edit_joke_path(@joke) %> |
+<% end %>
 <%= link_to 'Back', jokes_path %>

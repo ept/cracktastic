@@ -1,4 +1,8 @@
 class CompaniesController < ApplicationController
+  
+  before_filter :login_required
+  before_filter :admin_required, :only => [:index, :destroy]
+  
   # GET /companies
   # GET /companies.xml
   def index
@@ -14,6 +18,7 @@ class CompaniesController < ApplicationController
   # GET /companies/1.xml
   def show
     @company = Company.find(params[:id])
+    raise ActiveRecord::RecordNotFound unless current_user.company == @company || logged_in_as_admin?
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,6 +40,7 @@ class CompaniesController < ApplicationController
   # GET /companies/1/edit
   def edit
     @company = Company.find(params[:id])
+    raise ActiveRecord::RecordNotFound unless current_user.company == @company || logged_in_as_admin?
   end
 
   # POST /companies
@@ -44,6 +50,8 @@ class CompaniesController < ApplicationController
 
     respond_to do |format|
       if @company.save
+        current_user.company = @company
+        current_user.save!
         flash[:notice] = 'Company was successfully created.'
         format.html { redirect_to(@company) }
         format.xml  { render :xml => @company, :status => :created, :location => @company }
@@ -58,6 +66,7 @@ class CompaniesController < ApplicationController
   # PUT /companies/1.xml
   def update
     @company = Company.find(params[:id])
+    raise ActiveRecord::RecordNotFound unless current_user.company == @company || logged_in_as_admin?
 
     respond_to do |format|
       if @company.update_attributes(params[:company])

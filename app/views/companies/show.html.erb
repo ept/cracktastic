@@ -1,7 +1,9 @@
+<% if logged_in_as_admin? %>
 <p>
   <b>Is self:</b>
   <%=h @company.is_self %>
 </p>
+<% end %>
 
 <p>
   <b>Name:</b>
