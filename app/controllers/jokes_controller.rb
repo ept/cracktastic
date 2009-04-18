@@ -28,6 +28,7 @@ class JokesController < ApplicationController
   # GET /jokes/1.xml
   def show
     @joke = Joke.find(params[:id])
+    return redirect_to :action => 'checkout', :id => @joke.id unless current_user.jokes.include? @joke || logged_in_as_admin?
 
     respond_to do |format|
       format.html # show.html.erb
