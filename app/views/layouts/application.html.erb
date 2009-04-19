@@ -14,6 +14,9 @@
 <ul>
 	<li><%= link_to 'My jokes', {:controller => 'jokes', :action => 'my'}, {:title => "See a list of jokes you have purchased"} %></li>
 	<li><%= link_to 'Available jokes', jokes_path, :title => "All available jokes" %></li>
+<% if logged_in? -%>
+  <li><%= link_to 'Billing', ledger_path(current_user.company) %></li>
+<% end -%>
 </ul>
 
 <p style="color: green"><%= flash[:notice] %></p>

@@ -5,8 +5,8 @@ module Billing
     has_many :line_items, :class_name => 'Billing::LineItem'
     
     # Change the following associations to refer to your customer or supplier model class
-    #belongs_to :sender, :class_name => 'FIXME'
-    #belongs_to :recipient, :class_name => 'FIXME'
+    belongs_to :sender, :class_name => 'Company'
+    belongs_to :recipient, :class_name => 'Company'
     
     # Returns a hash containing details about the sender of this invoice, credit note or payment. This allows
     # you to integrate the invoicing gem with your existing model objects for users and customers/suppliers.
@@ -28,13 +28,13 @@ module Billing
     #                          one, preferably including the country identifier at the beginning. This is important for
     #                          transactions within the European Union.
     def sender_details
-      raise 'FIXME: you must implement Billing::LedgerItem#sender_details'
+      sender.attributes.symbolize_keys
     end
     
     # Returns a hash containing details about the recipient of this invoice, credit note or payment,
     # in the same format as returned by +sender_details+.
     def recipient_details
-      raise 'FIXME: you must implement Billing::LedgerItem#recipient_details'
+      recipient.attributes.symbolize_keys
     end
     
     # Returns the user-visible identifier for a document, e.g. the invoice number. The default is to simply
