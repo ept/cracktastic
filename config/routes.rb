@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.ledger 'billing/:id/ledger', :controller => 'billing', :action => 'ledger'
+  map.statement 'billing/:id/:other_id', :controller => 'billing', :action => 'statement', :id => /\d+/, :other_id => nil
+  map.document 'billing/document/:id', :controller => 'billing', :action => 'document'
+
   map.resources :jokes, :member => { :checkout => :get, :purchase => :post }, :collection => { :my => :get }
 
   map.resources :companies
